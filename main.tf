@@ -14,7 +14,7 @@ resource "datadog_timeboard" "elb_application" {
     autoscale = true
 
     request {
-      q    = "avg:aws.applicationelb.client_tlsnegotiation_error_count{$lb_name} by {availability-zone}"
+      q    = "avg:aws.applicationelb.client_tlsnegotiation_error_count{$lb_name} by {name,availability-zone}"
       type = "line"
     }
   }
@@ -25,12 +25,12 @@ resource "datadog_timeboard" "elb_application" {
     autoscale = true
 
     request {
-      q    = "avg:aws.applicationelb.httpcode_elb_4xx{$lb_name} by {availability-zone}.as_count()"
+      q    = "avg:aws.applicationelb.httpcode_elb_4xx{$lb_name} by {name,availability-zone}.as_count()"
       type = "line"
     }
 
     request {
-      q    = "avg:aws.applicationelb.httpcode_elb_5xx{$lb_name} by {availability-zone}.as_count()"
+      q    = "avg:aws.applicationelb.httpcode_elb_5xx{$lb_name} by {name,availability-zone}.as_count()"
       type = "line"
     }
   }
@@ -41,22 +41,22 @@ resource "datadog_timeboard" "elb_application" {
     autoscale = true
 
     request {
-      q    = "avg:aws.applicationelb.httpcode_target_2xx{$lb_name} by {availability-zone}.as_count()"
+      q    = "avg:aws.applicationelb.httpcode_target_2xx{$lb_name} by {name,availability-zone}.as_count()"
       type = "line"
     }
 
     request {
-      q    = "avg:aws.applicationelb.httpcode_target_3xx{$lb_name} by {availability-zone}.as_count()"
+      q    = "avg:aws.applicationelb.httpcode_target_3xx{$lb_name} by {name,availability-zone}.as_count()"
       type = "line"
     }
 
     request {
-      q    = "avg:aws.applicationelb.httpcode_target_4xx{$lb_name} by {availability-zone}.as_count()"
+      q    = "avg:aws.applicationelb.httpcode_target_4xx{$lb_name} by {name,availability-zone}.as_count()"
       type = "line"
     }
 
     request {
-      q    = "avg:aws.applicationelb.httpcode_target_3xx{$lb_name} by {availability-zone}.as_count()"
+      q    = "avg:aws.applicationelb.httpcode_target_3xx{$lb_name} by {name,availability-zone}.as_count()"
       type = "line"
     }
   }
@@ -67,7 +67,7 @@ resource "datadog_timeboard" "elb_application" {
     autoscale = true
 
     request {
-      q    = "avg:aws.applicationelb.request_count{$lb_name} by {availability-zone}.as_count()"
+      q    = "avg:aws.applicationelb.request_count{$lb_name} by {name,availability-zone}.as_count()"
       type = "line"
     }
   }
@@ -78,22 +78,22 @@ resource "datadog_timeboard" "elb_application" {
     autoscale = true
 
     request {
-      q    = "avg:aws.applicationelb.healthy_host_count{$lb_name} by {availability-zone}"
+      q    = "avg:aws.applicationelb.healthy_host_count{$lb_name} by {name,availability-zone}"
       type = "line"
     }
 
     request {
-      q    = "avg:aws.applicationelb.healthy_host_count.maximum{$lb_name} by {availability-zone}"
+      q    = "avg:aws.applicationelb.healthy_host_count.maximum{$lb_name} by {name,availability-zone}"
       type = "line"
     }
 
     request {
-      q    = "avg:aws.applicationelb.healthy_host_count.minimum{$lb_name} by {availability-zone}"
+      q    = "avg:aws.applicationelb.healthy_host_count.minimum{$lb_name} by {name,availability-zone}"
       type = "line"
     }
 
     request {
-      q    = "avg:aws.applicationelb.healthy_host_count_deduped{$lb_name} by {availability-zone}"
+      q    = "avg:aws.applicationelb.healthy_host_count_deduped{$lb_name} by {name,availability-zone}"
       type = "line"
     }
   }
@@ -104,22 +104,22 @@ resource "datadog_timeboard" "elb_application" {
     autoscale = true
 
     request {
-      q    = "avg:aws.applicationelb.un_healthy_host_count{$lb_name} by {availability-zone}"
+      q    = "avg:aws.applicationelb.un_healthy_host_count{$lb_name} by {name,availability-zone}"
       type = "line"
     }
 
     request {
-      q    = "avg:aws.applicationelb.un_healthy_host_count.maximum{$lb_name} by {availability-zone}"
+      q    = "avg:aws.applicationelb.un_healthy_host_count.maximum{$lb_name} by {name,availability-zone}"
       type = "line"
     }
 
     request {
-      q    = "avg:aws.applicationelb.un_healthy_host_count.minimum{$lb_name} by {availability-zone}"
+      q    = "avg:aws.applicationelb.un_healthy_host_count.minimum{$lb_name} by {name,availability-zone}"
       type = "line"
     }
 
     request {
-      q    = "avg:aws.applicationelb.un_healthy_host_count_deduped{$lb_name} by {availability-zone}"
+      q    = "avg:aws.applicationelb.un_healthy_host_count_deduped{$lb_name} by {name,availability-zone}"
       type = "line"
     }
   }
@@ -130,29 +130,7 @@ resource "datadog_timeboard" "elb_application" {
     autoscale = true
 
     request {
-      q    = "avg:aws.applicationelb.active_connection_count{$lb_name} by {availability-zone}"
-      type = "line"
-    }
-  }
-
-  graph {
-    title     = "Processed Bytes"
-    viz       = "timeseries"
-    autoscale = true
-
-    request {
-      q    = "avg:aws.applicationelb.processed_bytes{$lb_name} by {availability-zone}.as_count()"
-      type = "line"
-    }
-  }
-
-  graph {
-    title     = "Consumed Lcus"
-    viz       = "timeseries"
-    autoscale = true
-
-    request {
-      q    = "avg:aws.applicationelb.consumed_lcus{$lb_name} by {availability-zone}"
+      q    = "avg:aws.applicationelb.active_connection_count{$lb_name} by {name}"
       type = "line"
     }
   }
@@ -163,7 +141,29 @@ resource "datadog_timeboard" "elb_application" {
     autoscale = true
 
     request {
-      q    = "avg:aws.applicationelb.new_connection_count{$lb_name} by {availability-zone}.as_count()"
+      q    = "avg:aws.applicationelb.new_connection_count{$lb_name} by {name}.as_count()"
+      type = "line"
+    }
+  }
+
+  graph {
+    title     = "Processed Bytes"
+    viz       = "timeseries"
+    autoscale = true
+
+    request {
+      q    = "avg:aws.applicationelb.processed_bytes{$lb_name} by {name}.as_count()"
+      type = "line"
+    }
+  }
+
+  graph {
+    title     = "Consumed Lcus"
+    viz       = "timeseries"
+    autoscale = true
+
+    request {
+      q    = "avg:aws.applicationelb.consumed_lcus{$lb_name} by {name}"
       type = "line"
     }
   }
