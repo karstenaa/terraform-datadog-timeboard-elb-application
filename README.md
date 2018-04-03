@@ -1,7 +1,7 @@
 terraform-datadog-timeboard-elb-application
 =================
 
-Terraform module to create Datadog timeboard for ELB application.
+Terraform module to create Datadog timeboard for ELB Application.
 
 
 
