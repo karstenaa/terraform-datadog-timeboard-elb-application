@@ -1,7 +1,7 @@
 variable "product_domain" {
-  default = "ENT"
+  default = "BEI"
 }
 
 variable "lb_name" {
-  default = "entcurr-lbint-01"
+  default = "beical-lbint-01"
 }
